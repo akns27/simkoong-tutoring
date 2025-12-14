@@ -95,8 +95,20 @@ vercel --prod
    - `GEMINI_API_KEY`: Gemini API 키 입력
 5. "Deploy" 클릭
 
-**중요:** Vercel 대시보드에서 환경 변수 `GEMINI_API_KEY`를 반드시 설정해야 합니다.
-- Settings → Environment Variables → `GEMINI_API_KEY` 추가
+**중요:** Vercel 대시보드에서 환경 변수를 반드시 설정해야 합니다.
+
+**환경 변수 설정 방법:**
+1. Vercel 프로젝트 대시보드로 이동
+2. Settings → Environment Variables 클릭
+3. 다음 중 하나를 추가:
+   - **방법 1 (권장):** `VITE_GEMINI_API_KEY` = `your-api-key-here`
+   - **방법 2:** `GEMINI_API_KEY` = `your-api-key-here`
+4. **모든 환경** (Production, Preview, Development)에 적용되도록 선택
+5. 저장 후 **재배포** 필요 (자동 재배포되지 않으므로 수동으로 재배포하거나 새 커밋 푸시)
+
+**재배포 방법:**
+- Vercel 대시보드에서 "Redeploy" 클릭
+- 또는 새 커밋을 GitHub에 푸시하면 자동 재배포
 
 ### 2. Netlify 배포
 
