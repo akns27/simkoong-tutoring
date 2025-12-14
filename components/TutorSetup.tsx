@@ -17,9 +17,13 @@ const TutorSetup: React.FC<TutorSetupProps> = ({ onComplete, initialTutors }) =>
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Load initial tutors if available (persisted state)
+  // Only load if initialTutors is a non-empty array
   useEffect(() => {
-    if (initialTutors && initialTutors.length > 0) {
+    if (Array.isArray(initialTutors) && initialTutors.length > 0) {
       setTutors(initialTutors);
+    } else {
+      // Ensure empty state if no tutors
+      setTutors([]);
     }
   }, [initialTutors]);
 
