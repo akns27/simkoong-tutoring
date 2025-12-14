@@ -4,20 +4,21 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
+    // Get API key from environment (supports both GEMINI_API_KEY and VITE_GEMINI_API_KEY)
+    const apiKey = env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY || '';
+    
     return {
       server: {
         port: 3000,
         host: '0.0.0.0',
       },
       plugins: [react()],
-      // Vite automatically exposes VITE_* env vars to client
-      // For compatibility, also define them explicitly
+      // Define environment variables for client-side use
+      // Vite will replace these at build time
       define: {
-        'import.meta.env.VITE_GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY),
-        'import.meta.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY),
-        // Legacy support
-        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY),
-        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY || env.VITE_GEMINI_API_KEY)
+        'process.env.VITE_GEMINI_API_KEY': JSON.stringify(apiKey),
+        'process.env.GEMINI_API_KEY': JSON.stringify(apiKey),
+        'process.env.API_KEY': JSON.stringify(apiKey)
       },
       resolve: {
         alias: {

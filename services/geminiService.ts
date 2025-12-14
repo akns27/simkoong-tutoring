@@ -1,8 +1,9 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { Tutor, AnalysisResult, QuizData } from "../types";
 
-// Use import.meta.env for Vite, fallback to empty string
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || import.meta.env.GEMINI_API_KEY || ''; 
+// Get API key from environment variables
+// Vite will replace process.env.* at build time via define in vite.config.ts
+const apiKey = process.env.VITE_GEMINI_API_KEY || process.env.GEMINI_API_KEY || process.env.API_KEY || ''; 
 const ai = new GoogleGenAI({ apiKey });
 
 const MODEL_NAME = 'gemini-2.5-flash';
