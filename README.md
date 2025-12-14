@@ -19,6 +19,58 @@ View your app in AI Studio: https://ai.studio/apps/drive/1BG5K7qVw2wHanLfWwhyc6Z
 3. Run the app:
    `npm run dev`
 
+## GitHub에 업로드하기
+
+### 1. GitHub 저장소 생성
+
+1. [GitHub](https://github.com)에 로그인
+2. 우측 상단 "+" 아이콘 클릭 → "New repository" 선택
+3. 저장소 이름 입력 (예: `심쿵-과외` 또는 `simkung-tutor`)
+4. Public 또는 Private 선택
+5. **"Initialize this repository with a README" 체크 해제** (이미 로컬에 파일이 있으므로)
+6. "Create repository" 클릭
+
+### 2. 로컬 저장소를 GitHub에 연결
+
+GitHub에서 생성한 저장소의 URL을 복사한 후 아래 명령어를 실행하세요:
+
+```bash
+# GitHub 저장소 URL 추가 (아래 URL을 실제 저장소 URL로 변경하세요)
+git remote add origin https://github.com/your-username/your-repo-name.git
+
+# 브랜치 이름을 main으로 설정 (이미 main이면 생략 가능)
+git branch -M main
+
+# GitHub에 푸시
+git push -u origin main
+```
+
+**또는 SSH를 사용하는 경우:**
+```bash
+git remote add origin git@github.com:your-username/your-repo-name.git
+git branch -M main
+git push -u origin main
+```
+
+### 3. 이후 변경사항 업로드
+
+```bash
+# 변경된 파일 추가
+git add .
+
+# 커밋
+git commit -m "변경사항 설명"
+
+# GitHub에 푸시
+git push
+```
+
+### ⚠️ 주의사항
+
+- `.env.local` 파일은 `.gitignore`에 포함되어 있어 자동으로 제외됩니다
+- **절대 API 키를 GitHub에 올리지 마세요!**
+- 환경 변수는 배포 플랫폼(Vercel, Netlify 등)에서 별도로 설정해야 합니다
+
 ## 배포하기 (Deploy)
 
 ### 1. Vercel 배포 (추천)
