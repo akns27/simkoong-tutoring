@@ -11,13 +11,20 @@ const TUTOR_STORAGE_KEY = 'simkung_tutors_data';
 const App: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<AppStep>(AppStep.SPLASH);
   
-  // Initialize tutors from local storage
+  // Initialize tutors from local storage (empty by default)
   const [tutors, setTutors] = useState<Tutor[]>(() => {
     try {
       const saved = localStorage.getItem(TUTOR_STORAGE_KEY);
-      return saved ? JSON.parse(saved) : [];
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // Ensure it's an array and not corrupted data
+        return Array.isArray(parsed) ? parsed : [];
+      }
+      return [];
     } catch (e) {
       console.error("Failed to load tutors from storage", e);
+      // Clear corrupted data
+      localStorage.removeItem(TUTOR_STORAGE_KEY);
       return [];
     }
   });
